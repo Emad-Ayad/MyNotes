@@ -8,3 +8,5 @@ class AppColors {
   static const lightBlack = Color(0xFF202538);
   static const kPrimaryColor = Color(0xFF62fcd7);
 }
+
+const String kNotesBox='notes_box';
