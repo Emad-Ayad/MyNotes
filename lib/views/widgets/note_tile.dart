@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mynotes/data/model/note_model.dart';
 import 'package:mynotes/views/widgets/edit_note_view.dart';
 
 class NoteTile extends StatelessWidget {
-  const NoteTile({super.key});
+   const NoteTile({super.key, required this.note});
 
+  final NoteModel note;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -12,7 +14,7 @@ class NoteTile extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return EditNoteView();
+              return const EditNoteView();
             },
           ),
         );
@@ -22,34 +24,37 @@ class NoteTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           color: Colors.yellow,
         ),
-        child: const Padding(
-          padding: EdgeInsets.only(top: 16.0, bottom: 16, left: 10),
+        child:  Padding(
+          padding: const EdgeInsets.only(top: 16.0, bottom: 16, left: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               ListTile(
                 title: Text(
-                  "Learn Flutter",
-                  style: TextStyle(color: Colors.black, fontSize: 20),
+                  note.title,
+                  style: const TextStyle(color: Colors.black, fontSize: 20),
                 ),
                 subtitle: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Text(
-                    "If u wanna learn something come to me ",
-                    style: TextStyle(color: Colors.black54, fontSize: 16),
+                    note.subTitle,
+                    style: const TextStyle(color: Colors.black54, fontSize: 16),
                   ),
                 ),
-                trailing: Icon(
-                  Icons.delete,
-                  color: Colors.black,
-                  size: 28,
+                trailing: IconButton(
+                  icon: const Icon(Icons.delete,
+                    color: Colors.black,
+                    size: 28,),
+                  onPressed: (){
+                    note.delete();
+                  },
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(right: 16.0),
+                padding: const EdgeInsets.only(right: 16.0),
                 child: Text(
-                  "Mar 25/2022",
-                  style: TextStyle(color: Colors.black, fontSize: 14),
+                  note.date,
+                  style: const TextStyle(color: Colors.black, fontSize: 14),
                 ),
               )
             ],
